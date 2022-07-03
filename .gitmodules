@@ -1,0 +1,3 @@
+[submodule "kind2-embedded"]
+	path = kind2-embedded
+	url = https://github.com/EthanJamesLew/kind2-embedded.git
