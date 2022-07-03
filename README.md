@@ -19,7 +19,7 @@ Embedded Rust drivers need to be written to connect the dataflow model inputs/ou
 *Development Pipeline*
 
 ## Installation
-The embedded target used is the [STM32F407 Discovery board](https://www.st.com/en/evaluation-tools/stm32f4discovery.html). 
+The embedded target used is the [STM32F407 Discovery board](https://www.st.com/en/evaluation-tools/stm32f4discovery.html). All host tools are running on Ubuntu 20.04 LTS. 
 
 Requires (TODO: more detail here)
 * Rust with Cargo
@@ -28,7 +28,7 @@ Requires (TODO: more detail here)
 * `thumbv7em-none-eabihf` Rust target and toolchain
 
 For the Kind2, install OCaml and use dune to build. In `./kind2-embedded`,
-```shell
+```bash
 # to build and install
 dune build
 dune install

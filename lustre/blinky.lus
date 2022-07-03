@@ -1,0 +1,62 @@
+-- Some Utilities
+
+-- HasHappened(X) is true iff X has been true at some point
+node hasHappened(X : bool) returns (Y : bool);
+let
+  Y = X or (false -> pre Y);
+tel
+
+-- Sofar(X) is true at any point iff X has been true from
+-- the beginning until that point
+node sofar( X : bool ) returns ( Y : bool );
+let
+ Y = X -> (X and (pre Y));
+tel
+
+-- ECE 371 Assignment Specification
+contract blinkySpec (toggle: bool) returns (light_index, time: int);
+let
+    const num_leds = 4;
+
+    -- check that we implemented time correctly
+    guarantee "time_ge_zero" time >= 0;
+    guarantee "time_monotonic" true -> time = pre time + 1;
+
+    -- only three states {0, 1, ..., num_leds} are allowed
+    guarantee "index_cannot_exceed_max" light_index < num_leds;
+    guarantee "index_cannot_lt_zero" light_index >= 0;
+
+    -- whether blinky is activate depends on this condition
+    var on: bool = toggle ->    (pre on and not toggle) 
+                           or (not pre on and toggle) ;
+
+    -- when not on (off), guarantee that blinky will keep its current state
+    guarantee "off_stops_leds" (not on) => light_index = (light_index -> pre light_index);
+
+    -- when on, guarantee that blinky will not be its current state unless it's uninitialized, then that state is zero
+    guarantee "on_changes_leds" on => (light_index = 0 -> light_index <> pre light_index);
+
+    -- so far as the device has been running and time > num_leds, ensure that the max led state has happened
+    guarantee "all_happen_over_t_horizon" (sofar(on) and time = num_leds) => hasHappened(light_index = time);
+
+    -- pattern has period 4
+    guarantee "pattern_has_period_4" (sofar(on) and time >= num_leds) => hasHappened(light_index = pre pre pre pre light_index);
+tel
+
+-- Our System Model
+node blinky (toggle: bool) returns (light_index, time: int);
+(*@contract import blinkySpec(toggle) returns (light_index, time) ;*)
+    const num_leds = 4;
+    var running: bool;
+let
+    -- get whether the blinky sequence should be running
+    running = (false -> pre running) <> toggle;
+
+    -- increment the light index and apply mod if running else hold the current light
+    light_index = 
+        if running then 0 -> (pre light_index + 1) mod num_leds
+        else 0 -> pre light_index;
+
+    -- output the time
+    time = 0 -> pre time + 1;
+tel
