@@ -40,7 +40,11 @@ let
     guarantee "all_happen_over_t_horizon" (sofar(on) and time = num_leds) => hasHappened(light_index = time);
 
     -- pattern has period 4
-    guarantee "pattern_has_period_4" (sofar(on) and time >= num_leds) => hasHappened(light_index = pre pre pre pre light_index);
+    guarantee "pattern_has_period_4" (sofar(on) and time >= num_leds) => hasHappened(light_index = 
+        (light_index -> pre 
+        (light_index -> pre 
+        (light_index -> pre 
+        (light_index -> pre light_index)))));
 tel
 
 -- Our System Model

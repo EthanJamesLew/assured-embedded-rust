@@ -1,0 +1,9 @@
+[package]
+name = "blinky_implem"
+version = "0.1.0"
+authors = ["Kind 2 <elew@galois.com>"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
