@@ -1,0 +1,3 @@
+examples/**/* linguist-documentation=false
+*.lus linguist-language=Lustre linguist-detectable
+
