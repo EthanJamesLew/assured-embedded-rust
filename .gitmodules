@@ -1,3 +1,6 @@
 [submodule "kind2-embedded"]
 	path = kind2-embedded
 	url = https://github.com/EthanJamesLew/kind2-embedded.git
+[submodule "stm32f4xx-hal"]
+	path = examples/audio-filter/stm32f4xx-hal
+	url = https://github.com/stm32-rs/stm32f4xx-hal.git

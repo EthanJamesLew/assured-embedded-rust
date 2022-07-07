@@ -4,6 +4,7 @@ This repo has
 * Notes on Assuring Cyber-Physical Systems Models and Implementing Their Software Components in Embedded Hardware. This is a space to develop my embedded programming workflows as I explore tooling and techniques.
 * Example System Demonstrations
     * [Blinky](./examples/blinky) - a simple example of controlling LEDs from a push button using an "assured" development pipeline. The system flashes LEDs in a periodic sequence and can be paused/resumed by pushing the button. The specification was taken from a class project that I did in ECE 371.
+    * [Audio Filter](./examples/audio-filter) - a 96 kHz multi-band equalizer showing a DSP application. TODO...
     * (More Soon...)
 * A Lustre to Rust Compiler Prototype. This is based on the [compiler already in Kind2](https://kind.cs.uiowa.edu/kind2_user_doc/9_other/4_rust_compilation.html) with some necessary modifications. This prototype is suitable for
 embedded environments as it generates a rust library without using the standard library (`no_std`). Also, this compiler generates Rust 2021 Edition.
