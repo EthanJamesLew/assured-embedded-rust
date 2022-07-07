@@ -169,7 +169,7 @@ mod app {
     }
 
     // processing audio
-    #[task(binds = SPI5, local = [count: u32 = 0,process_c,process_p])]
+    #[task(binds = SPI1, local = [count: u32 = 0,process_c,process_p])]
     fn process(cx: process::Context) {
         let count = cx.local.count;
         let process_c = cx.local.process_c;
@@ -223,7 +223,7 @@ mod app {
                     // defer sample processing to another task
                     let (l, r) = *frame;
                     adc_p.enqueue((l as i32, r as i32)).ok();
-                    rtic::pend(Interrupt::SPI5);
+                    rtic::pend(Interrupt::SPI1);
                     *frame_state = LeftMsb;
                 }
                 // in case of ovr this resynchronize at start of new frame
