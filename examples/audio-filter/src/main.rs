@@ -28,7 +28,7 @@ mod app {
     use rtt_target::{rprintln, rtt_init, set_print_channel};
 
     type I2s2Driver = I2sDriver<I2s<SPI2, (PB12, PB13, PC6, PB15)>, Master, Receive, Philips>;
-    type I2s3Driver = I2sDriver<I2s<SPI3, (PA4, PC10, NoPin, PC12)>, Slave, Transmit, Philips>;
+    type I2s3Driver = I2sDriver<I2s<SPI3, (PA1, PC10, NoPin, PC12)>, Slave, Transmit, Philips>;
 
     // Part of the frame we currently transmit or receive
     #[derive(Copy, Clone)]
